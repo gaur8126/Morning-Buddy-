@@ -1,6 +1,6 @@
 import streamlit as st 
 import random 
-
+from application import temperature_of_city, news_summarizer, get_news, smart_planner_
 # Page Configuration 
 
 
@@ -50,7 +50,13 @@ def weather_news_page():
     """Display the page for getting weather and news by city."""
     st.header("Get Weather of the city")
     city = st.text_input("Enter your city name:")
-    st.success("done")
+    if st.button("Fetch Information"):
+        if city:
+            temperature_output = temperature_of_city(city)
+            st.subheader(f"Weather Info: {temperature_output}")
+            st.success("Weather feached successfully!!!")
+        else:
+            st.error("Please enter a city name.")
 
 def interest_news_page(): 
     """Display the page for getting news by interest"""
@@ -58,14 +64,78 @@ def interest_news_page():
     interest = st.text_input("Enter your area of interest (e.g., Technology, sports, Health):","Technology")
 
     if st.button("Fetch News"):
-        st.success("done")
+        if interest:
+            articles = get_news(interest)
+            title = []
+            url = []
+            image_url = []
+
+            for i in articles:
+                title.append(i['title'])
+                url.append(i['url'])
+                image_url.append(i['urlToImage'])
+
+            if not articles:
+                st.error("No news found.")
+
+            col1,col2,col3,col4,col5 = st.columns(5)
+            with col1:
+                st.subheader(title[0])
+                st.markdown("---")
+                st.image(image_url[0])
+                st.markdown("---")
+                st.write("Read full article here.",url[0])
+                st.markdown("---")
+                st.write(news_summarizer(url[0]))
+            with col2:
+                st.subheader(title[1])
+                st.markdown("---")
+                st.image(image_url[1])
+                st.markdown("---")
+                st.write("Read full article here.",url[1])
+                st.markdown("---")
+                st.write(news_summarizer(url[1]))
+            with col3:
+                st.subheader(title[2])
+                st.markdown("---")
+                st.image(image_url[2])
+                st.markdown("---")
+                st.write("Read full article here.",url[2])
+                st.markdown("---")
+                st.write(news_summarizer(url[2]))
+            with col4:
+                st.subheader(title[3])
+                st.markdown("---")
+                st.image(image_url[3])
+                st.markdown("---")
+                st.write("Read full article here.",url[3])
+                st.markdown("---")
+                st.write(news_summarizer(url[3]))
+            with col5:
+                st.subheader(title[4])
+                st.markdown("---")
+                st.image(image_url[4])
+                st.markdown("---")
+                st.write("Read full article here.",url[4])
+                st.markdown("---")
+                st.write(news_summarizer(url[4]))
+
+        else:
+            st.error("Please select your area of interest")
+
 
 def smart_planner():
     """Display the page for viewing the day's schedule"""
     st.header("Your smart Planner Day")
     city = st.text_input("Enter your city name:")
     if st.button("Let's Plan"):
-        st.success("done")
+        if city:
+            smart_plan = smart_planner_(city)
+            st.subheader(smart_plan)
+            st.success("Have a nice day")
+
+        else:
+            st.error("Please enter a city name.")
 
 
 # Sidebar Navigation
