@@ -7,7 +7,7 @@
 ### Installation Instructions:
 #### 1. clone the repo:
 ```bash
-git https://github.com/gaur8126/Morning-Buddy-.git
+git clone https://github.com/gaur8126/Morning-Buddy-.git
 ```
 #### 2.Change Directory:
 ```bash
