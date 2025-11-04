@@ -14,7 +14,7 @@ git https://github.com/gaur8126/Morning-Buddy-.git
 cd morning buddy
  ```
 
-#### 3. creare env:
+#### 3. create env:
 ```bash
 conda create -n venv python==3.10 -y
  ```
